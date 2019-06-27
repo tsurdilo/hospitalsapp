@@ -28,7 +28,7 @@ public class HospitalGenerator {
     }
 
     private Hospital genrateRandomHospital(int counter) {
-        return new Hospital(generateRandomName(), "New Hospital " + counter, "some address", 30040, null);
+        return new Hospital(generateRandomName(), "New Hospital " + counter, "some address", 0000, null);
     }
 
     private String generateRandomName() {

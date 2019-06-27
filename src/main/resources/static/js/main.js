@@ -17,15 +17,19 @@ function loadHospitals() {
             var cell0 = row.insertCell(0);
             var cell1 = row.insertCell(1);
             var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
 
-            cell0.className = "author-style";
+            cell0.className = "text";
             cell0.innerHTML = hospital.id;
 
             cell1.className = "text";
             cell1.innerHTML = hospital.name;
 
-            cell2.className = "date";
+            cell2.className = "text";
             cell2.innerHTML = hospital.address;
+
+            cell3.className = "text";
+            cell3.innerHTML = hospital.zip;
 
         });
 

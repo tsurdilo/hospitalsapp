@@ -4,6 +4,8 @@ import java.util.concurrent.CountDownLatch;
 
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class Receiver {
     @Autowired
     HospitalRepository hospitalRepository;
 
+    @Autowired
+    KieContainer kieContainer;
+
     private CountDownLatch latch = new CountDownLatch(1);
 
     public CountDownLatch getLatch() {
@@ -27,6 +32,11 @@ public class Receiver {
     @KafkaListener(topics = "hospital")
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
+
+        KieSession kieSession = kieContainer.newKieSession();
+        kieSession.insert(hospital);
+        kieSession.fireAllRules();
+        kieSession.dispose();
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
         Hospital foundHospital = hospitalMonoResult.block();
