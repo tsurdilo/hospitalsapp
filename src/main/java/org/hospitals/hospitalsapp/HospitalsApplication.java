@@ -13,15 +13,10 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @SpringBootApplication
 @EnableReactiveMongoRepositories
 @EnableScheduling
 public class HospitalsApplication {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(HospitalsApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalsApplication.class, args);
