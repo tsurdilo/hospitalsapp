@@ -102,7 +102,7 @@ public class HospitalTemplateOperationsManualTest {
 
     @Test
     public void testKafkaMessageStores() throws InterruptedException {
-        Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
+        Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
 
         sender.send(hospital);
         receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
@@ -114,13 +114,14 @@ public class HospitalTemplateOperationsManualTest {
         assertNotNull(hospitals);
         assertEquals(1, hospitals.size());
         assertEquals("Northside Hospital", hospitals.get(0).getName());
+        assertEquals(30040, hospitals.get(0).getZip());
 
     }
 
     @Test
     public void testKafkaMessageMultiStores() throws InterruptedException {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -133,7 +134,9 @@ public class HospitalTemplateOperationsManualTest {
         assertNotNull(hospitals);
         assertEquals(2, hospitals.size());
         assertEquals("Northside Hospital", hospitals.get(0).getName());
+        assertEquals(30040, hospitals.get(0).getZip());
         assertEquals("Piedmont Hospital", hospitals.get(1).getName());
+        assertEquals(30040, hospitals.get(1).getZip());
 
     }
 
