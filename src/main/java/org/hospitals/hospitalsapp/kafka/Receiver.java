@@ -3,7 +3,7 @@ package org.hospitals.hospitalsapp.kafka;
 import java.util.concurrent.CountDownLatch;
 
 import org.hospitals.hospitalsapp.data.Hospital;
-import org.hospitals.hospitalsapp.services.HospitalTemplateOperations;
+import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class Receiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
 
     @Autowired
-    HospitalTemplateOperations hospitalTemplate;
+    HospitalRepository hospitalRepository;
 
     private CountDownLatch latch = new CountDownLatch(1);
 
@@ -28,7 +28,7 @@ public class Receiver {
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
 
-        Mono<Hospital> hospitalMonoResult = hospitalTemplate.findById(hospital.getId());
+        Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
         Hospital foundHospital = hospitalMonoResult.block();
         if (foundHospital != null) {
             foundHospital.setAddress(hospital.getAddress());
@@ -36,9 +36,9 @@ public class Receiver {
             foundHospital.setZip(hospital.getZip());
             foundHospital.setPatients(hospital.getPatients());
 
-            hospitalTemplate.save(Mono.just(foundHospital)).block();
+            hospitalRepository.save(foundHospital).block();
         } else {
-            hospitalTemplate.save(Mono.just(hospital)).block();
+            hospitalRepository.save(hospital).block();
         }
         latch.countDown();
     }

@@ -4,28 +4,28 @@ function loadHospitals() {
 
     this.start = function () {
 
-        var commentTable = document.getElementById("hotels");
+        var hospitalsTable = document.getElementById("hospitals");
 
-        this.source = new EventSource("/hospital/stream");
+        this.source = new EventSource("/hospital/tail");
 
         this.source.addEventListener("message", function (event) {
 
             // These events are JSON, so parsing and DOM fiddling are needed
             var hospital = JSON.parse(event.data);
 
-            var row = commentTable.getElementsByTagName("tbody")[0].insertRow(0);
+            var row = hospitalsTable.getElementsByTagName("tbody")[0].insertRow(0);
             var cell0 = row.insertCell(0);
             var cell1 = row.insertCell(1);
             var cell2 = row.insertCell(2);
 
             cell0.className = "author-style";
-            cell0.innerHTML = hospital.author;
+            cell0.innerHTML = hospital.id;
 
             cell1.className = "text";
-            cell1.innerHTML = hospital.message;
+            cell1.innerHTML = hospital.name;
 
             cell2.className = "date";
-            cell2.innerHTML = hospital.timestamp;
+            cell2.innerHTML = hospital.address;
 
         });
 

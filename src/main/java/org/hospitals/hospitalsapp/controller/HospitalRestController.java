@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import org.hospitals.hospitalsapp.data.Hospital;
-import org.hospitals.hospitalsapp.services.HospitalTemplateOperations;
+import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +17,18 @@ public class HospitalRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HospitalRestController.class);
 
     @Autowired
-    HospitalTemplateOperations hospitalTemplate;
+    HospitalRepository hospitalRepository;
+
+    @GetMapping(path = "/hospital/tail", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Hospital> hospitalstail() {
+        LOGGER.info("streaming hospitals...'");
+        return hospitalRepository.findBy();
+    }
 
     @GetMapping(path = "/hospital/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Hospital> hospitalsfeed() {
+    public Flux<Hospital> hospitalsstream() {
         LOGGER.info("streaming hospitals...'");
-        return this.hospitalTemplate.findAll();
+        return hospitalRepository.findAll();
     }
 
 }
