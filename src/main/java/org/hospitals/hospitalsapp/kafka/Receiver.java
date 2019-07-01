@@ -21,7 +21,7 @@ public class Receiver {
     HospitalRepository hospitalRepository;
 
     @Autowired
-    KieContainer kieContainer;
+    KieSession kieSession;
 
     private CountDownLatch latch = new CountDownLatch(1);
 
@@ -33,10 +33,8 @@ public class Receiver {
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
 
-        KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(hospital);
         kieSession.fireAllRules();
-        kieSession.dispose();
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
         Hospital foundHospital = hospitalMonoResult.block();

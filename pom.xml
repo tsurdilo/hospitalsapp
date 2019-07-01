@@ -15,7 +15,7 @@
 	
 	<properties>
 		<java.version>1.8</java.version>
-		<kie.version>7.23.0.Final</kie.version>
+		<kogito.version>8.0.0-SNAPSHOT</kogito.version>
 	</properties>
 	
 	<dependencies>
@@ -41,31 +41,31 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		<!-- kie -->
+		<!-- kogito - drools -->
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${kie.version}</version>
+			<groupId>org.kie.kogito</groupId>
+			<artifactId>drools-core-static</artifactId>
+			<version>${kogito.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-decisiontables</artifactId>
-			<version>${kie.version}</version>
+			<groupId>org.kie.kogito</groupId>
+			<artifactId>drools-canonical-model</artifactId>
+			<version>${kogito.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${kie.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-ci</artifactId>
-			<version>${kie.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-spring</artifactId>
-			<version>${kie.version}</version>
+			<groupId>org.kie.kogito</groupId>
+			<artifactId>drools-model-compiler</artifactId>
+			<version>${kogito.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.kie.kogito</groupId>
+					<artifactId>drools-core-dynamic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.thoughtworks.xstream</groupId>
+					<artifactId>xstream</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- other -->
