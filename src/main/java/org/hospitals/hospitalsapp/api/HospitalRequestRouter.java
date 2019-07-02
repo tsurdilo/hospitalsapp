@@ -14,7 +14,7 @@ public class HospitalRequestRouter {
     @Bean
     public RouterFunction<?> routes(HospitalRequestHandler requestHandler) {
         return route(GET("/hospitals/{id}").and(accept(APPLICATION_JSON)), requestHandler::get)
-                .andRoute(GET("/hospitals").and(accept(APPLICATION_JSON)), requestHandler::getAll)
+                .andRoute(GET("/hospitalsall").and(accept(APPLICATION_JSON)), requestHandler::getAll)
                 .andRoute(GET("/hospitalsstream"), requestHandler::stream);
         // .andRoute(POST("/hospitals").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
         // requestHandler::post)

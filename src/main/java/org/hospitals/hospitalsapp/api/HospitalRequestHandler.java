@@ -32,15 +32,4 @@ public class HospitalRequestHandler {
                 Hospital.class);
     }
 
-    /**
-     * @GetMapping(path = "/hospital/stream", produces =
-     *                  MediaType.TEXT_EVENT_STREAM_VALUE) public Flux<Hospital>
-     *                  hospitalsstream() { return hospitalRepository.findAll(); }
-     */
-
-    /**
-     * public Mono<ServerResponse> streamWeather(ServerRequest request) { return
-     * ServerResponse.ok() .contentType(MediaType.TEXT_EVENT_STREAM)
-     * .body(weatherService.streamWeather(), WeatherEvent.class); }
-     */
 }

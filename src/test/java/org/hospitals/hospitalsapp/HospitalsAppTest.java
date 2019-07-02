@@ -111,8 +111,8 @@ public class HospitalsAppTest {
         Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
 
         sender.send(hospital);
-        receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
-        assertEquals(0, receiver.getLatch().getCount());
+
+        Thread.sleep(5000);
 
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
         assertNotNull(hospitalFlux);
@@ -162,5 +162,24 @@ public class HospitalsAppTest {
 
         assertNotNull(hospitals);
         assertEquals(2, hospitals.size());
+    }
+
+    @Test
+    public void testHospitalGetById() throws Exception {
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
+
+        sender.send(hospital1);
+        sender.send(hospital2);
+
+        Thread.sleep(5000);
+
+        Hospital hospital = webClient.get().uri("/hospitals/{id}", "northside")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE)).exchange().expectStatus().isOk()
+                .returnResult(Hospital.class).getResponseBody().single().block();
+
+        assertNotNull(hospital);
+        assertEquals("Northside Hospital", hospital.getName());
+
     }
 }
