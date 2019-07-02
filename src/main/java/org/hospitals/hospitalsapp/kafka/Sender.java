@@ -10,7 +10,7 @@ public class Sender {
     @Autowired
     private KafkaTemplate<String, Hospital> kafkaTemplate;
 
-    @Value("${hospitalapp.kafka.topic}")
+    @Value("${kafka.topic.hospital}")
     private String hospitalTopicName;
 
     public void send(Hospital hospital) {

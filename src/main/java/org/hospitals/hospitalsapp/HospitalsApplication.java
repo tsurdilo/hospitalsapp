@@ -3,6 +3,7 @@ package org.hospitals.hospitalsapp;
 import com.mongodb.reactivestreams.client.MongoClient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,9 +21,12 @@ public class HospitalsApplication {
 	@Autowired
 	MongoClient mongoClient;
 
+	@Value("${hospitalapp.mongo.dbname}")
+	String dbName;
+
 	@Bean
 	public ReactiveMongoTemplate reactiveMongoTemplate() {
-		return new ReactiveMongoTemplate(mongoClient, "hospitals");
+		return new ReactiveMongoTemplate(mongoClient, dbName);
 	}
 
 }

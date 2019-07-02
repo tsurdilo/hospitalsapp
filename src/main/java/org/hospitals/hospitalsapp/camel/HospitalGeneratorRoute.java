@@ -1,5 +1,6 @@
 package org.hospitals.hospitalsapp.camel;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -18,11 +19,16 @@ public class HospitalGeneratorRoute extends RouteBuilder {
     @Autowired
     Sender sender;
 
+    @Autowired
+    CamelContext camelContext;
+
     @Value("${hospitalapp.camel.process.routes}")
     private boolean processRoutes;
 
     @Override
     public void configure() throws Exception {
+
+        // routes
 
         // generate random hospital every 5 seconds
         // process sending kafka message

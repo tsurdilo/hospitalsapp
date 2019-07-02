@@ -22,7 +22,7 @@ public class ReceiverConfig {
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${hospitalapp.kafka.topic}")
+    @Value("${kafka.topic.hospital}")
     private String hospitalTopicName;
 
     @Bean

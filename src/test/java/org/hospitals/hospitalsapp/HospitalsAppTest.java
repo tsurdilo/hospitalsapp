@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = HospitalsApplication.class)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, topics = { "${hospitalapp.kafka.topic}" })
+@EmbeddedKafka(partitions = 1, topics = { "${kafka.topic.hospital}" })
 public class HospitalsAppTest {
 
     @Autowired
@@ -158,7 +158,7 @@ public class HospitalsAppTest {
 
         List<Hospital> hospitals = webClient.get().uri("/hospital/stream")
                 .accept(MediaType.valueOf(MediaType.TEXT_EVENT_STREAM_VALUE)).exchange().expectStatus().isOk()
-                .returnResult(Hospital.class).getResponseBody().take(2).collectList().block();
+                .returnResult(Hospital.class).getResponseBody().collectList().block();
 
         assertNotNull(hospitals);
         assertEquals(2, hospitals.size());

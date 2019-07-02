@@ -28,7 +28,7 @@ public class Receiver {
         return latch;
     }
 
-    @KafkaListener(topics = "${hospitalapp.kafka.topic}")
+    @KafkaListener(topics = "${kafka.topic.hospital}")
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
 
