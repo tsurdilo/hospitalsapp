@@ -156,7 +156,7 @@ public class HospitalsAppTest {
 
         Thread.sleep(5000);
 
-        List<Hospital> hospitals = webClient.get().uri("/hospital/stream")
+        List<Hospital> hospitals = webClient.get().uri("/hospitalsstream")
                 .accept(MediaType.valueOf(MediaType.TEXT_EVENT_STREAM_VALUE)).exchange().expectStatus().isOk()
                 .returnResult(Hospital.class).getResponseBody().collectList().block();
 
