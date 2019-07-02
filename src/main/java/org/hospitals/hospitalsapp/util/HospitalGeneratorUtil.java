@@ -3,35 +3,27 @@ package org.hospitals.hospitalsapp.util;
 import java.util.Random;
 
 import org.hospitals.hospitalsapp.data.Hospital;
-import org.hospitals.hospitalsapp.kafka.Sender;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HospitalGenerator {
+public class HospitalGeneratorUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HospitalGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HospitalGeneratorUtil.class);
+    private static int counter = 0;
 
-    private Sender sender;
-    private int counter = 0;
-
-    public HospitalGenerator(Sender sender) {
-        this.sender = sender;
-    }
-
-    @Scheduled(fixedDelay = 5000)
-    public void generateRandomHospital() {
+    public static Hospital generateRandomHospital() {
         LOGGER.info("generating random hospital...'");
-        sender.send(genrateRandomHospital(counter));
+        Hospital hospital = genrateRandomHospital(counter);
         counter++;
+        return hospital;
     }
 
-    private Hospital genrateRandomHospital(int counter) {
+    private static Hospital genrateRandomHospital(int counter) {
         return new Hospital(generateRandomName(), "New Hospital " + counter, "some address", 0000, null);
     }
 
-    private String generateRandomName() {
+    private static String generateRandomName() {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;

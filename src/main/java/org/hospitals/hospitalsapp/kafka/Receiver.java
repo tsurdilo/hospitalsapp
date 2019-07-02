@@ -4,7 +4,6 @@ import java.util.concurrent.CountDownLatch;
 
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
-import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class Receiver {
         return latch;
     }
 
-    @KafkaListener(topics = "hospital")
+    @KafkaListener(topics = "${hospitalapp.kafka.topic}")
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
 

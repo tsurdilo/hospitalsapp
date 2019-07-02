@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<kogito.version>8.0.0-SNAPSHOT</kogito.version>
+		<camel.version>2.24.1</camel.version>
 	</properties>
 	
 	<dependencies>
@@ -31,6 +32,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 		<!-- kafka -->
 		<dependency>

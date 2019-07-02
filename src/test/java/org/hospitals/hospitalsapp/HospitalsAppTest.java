@@ -5,6 +5,7 @@ import org.hospitals.hospitalsapp.data.Patient;
 import org.hospitals.hospitalsapp.kafka.Receiver;
 import org.hospitals.hospitalsapp.kafka.Sender;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -32,8 +33,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = HospitalsApplication.class)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, topics = { "hospital" })
-public class HospitalTemplateOperationsManualTest {
+@EmbeddedKafka(partitions = 1, topics = { "${hospitalapp.kafka.topic}" })
+public class HospitalsAppTest {
 
     @Autowired
     private WebTestClient webClient;
@@ -52,7 +53,12 @@ public class HospitalTemplateOperationsManualTest {
 
     @Before
     public void setUp() throws Exception {
-        hospitalRepository.deleteAll();
+        hospitalRepository.deleteAll().block();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        hospitalRepository.deleteAll().block();
     }
 
     @Test
