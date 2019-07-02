@@ -147,7 +147,7 @@ public class HospitalsAppTest {
     }
 
     @Test
-    public void testHotelStream() throws InterruptedException {
+    public void testHospitalStream() throws InterruptedException {
         Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
         Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
 
