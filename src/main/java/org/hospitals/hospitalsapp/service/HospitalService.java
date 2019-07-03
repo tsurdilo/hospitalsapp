@@ -28,4 +28,14 @@ public class HospitalService {
 
     }
 
+    public Mono<Hospital> addHospital(Mono<Hospital> hospital) {
+        return hospital.flatMap(h -> {
+            return hospitalRepository.insert(h);
+        });
+    }
+
+    public Mono<Void> deleteById(String id) {
+        return hospitalRepository.deleteById(id);
+    }
+
 }

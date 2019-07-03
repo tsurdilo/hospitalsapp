@@ -15,13 +15,9 @@ public class HospitalRequestRouter {
     public RouterFunction<?> routes(HospitalRequestHandler requestHandler) {
         return route(GET("/hospitals/{id}").and(accept(APPLICATION_JSON)), requestHandler::get)
                 .andRoute(GET("/hospitalsall").and(accept(APPLICATION_JSON)), requestHandler::getAll)
-                .andRoute(GET("/hospitalsstream"), requestHandler::stream);
-        // .andRoute(POST("/hospitals").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
-        // requestHandler::post)
-        // .andRoute(PUT("/hospitals/{id}").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
-        // requestHandler::put)
-        // .andRoute(DELETE("/hospitals/{id}"), requestHandler::delete)
-        // .andRoute(GET("/hospitalstream").and(accept(APPLICATION_JSON)),
-        // requestHandler::streamall);
+                .andRoute(GET("/hospitalsstream"), requestHandler::stream)
+                .andRoute(PUT("/hospitals/{id}").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
+                        requestHandler::put)
+                .andRoute(DELETE("/hospitals/{id}"), requestHandler::delete);
     }
 }

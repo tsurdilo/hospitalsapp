@@ -2,7 +2,6 @@ package org.hospitals.hospitalsapp;
 
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.data.Patient;
-import org.hospitals.hospitalsapp.kafka.Receiver;
 import org.hospitals.hospitalsapp.kafka.Sender;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.junit.After;
@@ -18,13 +17,14 @@ import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -44,9 +44,6 @@ public class HospitalsAppTest {
 
     @Autowired
     private Sender sender;
-
-    @Autowired
-    private Receiver receiver;
 
     @ClassRule
     public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, true, "hospital");
@@ -180,6 +177,37 @@ public class HospitalsAppTest {
 
         assertNotNull(hospital);
         assertEquals("Northside Hospital", hospital.getName());
+
+    }
+
+    @Test
+    public void testPutNewHospital() throws Exception {
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
+        webClient.put().uri("/hospitals/{id}", hospital1.getId()).body(BodyInserters.fromObject(hospital1)).exchange()
+                .expectStatus().isOk();
+
+        Hospital hospital = webClient.get().uri("/hospitals/{id}", "northside")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE)).exchange().expectStatus().isOk()
+                .returnResult(Hospital.class).getResponseBody().single().block();
+
+        assertNotNull(hospital);
+        assertEquals("Northside Hospital", hospital.getName());
+
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testAddThenDeleteHospital() throws Exception {
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
+        // add
+        webClient.put().uri("/hospitals/{id}", hospital1.getId()).body(BodyInserters.fromObject(hospital1)).exchange()
+                .expectStatus().isOk();
+
+        // delete
+        webClient.delete().uri("/hospitals/{id}", hospital1.getId()).exchange().expectStatus().isOk();
+
+        // get (try)
+        webClient.get().uri("/hospitals/{id}", "northside").accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .exchange().expectStatus().isOk().returnResult(Hospital.class).getResponseBody().single().block();
 
     }
 }
