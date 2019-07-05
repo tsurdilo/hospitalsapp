@@ -105,8 +105,9 @@ public class HospitalsAppTest {
 
     @Test
     public void testKafkaMessageStores() throws InterruptedException {
-        Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
+        Hospital hospital = new Hospital("12345", "Northside Hospital", "some address", 0000, null);
 
+        hospitalRepository.deleteAll().block();
         sender.send(hospital);
 
         Thread.sleep(5000);
@@ -114,6 +115,11 @@ public class HospitalsAppTest {
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
         assertNotNull(hospitalFlux);
         List<Hospital> hospitals = hospitalFlux.collectList().block();
+
+
+        System.out.println("\n\n\n\n\n\n*********** I TEST HOSPITALS: ");
+        hospitals.stream().forEach(System.out::println);
+
         assertNotNull(hospitals);
         assertEquals(1, hospitals.size());
         assertEquals("Northside Hospital", hospitals.get(0).getName());

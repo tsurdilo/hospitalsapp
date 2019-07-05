@@ -1,0 +1,12 @@
+package org.hospitals.hospitalsapp.rules;
+unit HospitalRuleService
+import org.hospitals.hospitalsapp.data.Hospital;
+
+
+rule "org.hospitals.hospitalapp.rules.HospitalRuleService.IncomingHospital"
+when
+    $h : Hospital() from hospitalsInStream
+then
+    $h.setZip(30040);
+    hospitalsOutStream.append( $h );
+end
