@@ -116,10 +116,6 @@ public class HospitalsAppTest {
         assertNotNull(hospitalFlux);
         List<Hospital> hospitals = hospitalFlux.collectList().block();
 
-
-        System.out.println("\n\n\n\n\n\n*********** I TEST HOSPITALS: ");
-        hospitals.stream().forEach(System.out::println);
-
         assertNotNull(hospitals);
         assertEquals(1, hospitals.size());
         assertEquals("Northside Hospital", hospitals.get(0).getName());

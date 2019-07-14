@@ -19,7 +19,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
-@ComponentScan({"org.hospitals", "org.drools.project.model"})
+@ComponentScan({ "org.hospitals", "org.drools.project" })
 public class HospitalsApplication {
 
 	public static void main(String[] args) {
