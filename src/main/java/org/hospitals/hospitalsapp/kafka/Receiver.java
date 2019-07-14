@@ -22,7 +22,7 @@ public class Receiver {
     HospitalRepository hospitalRepository;
 
     @Autowired
-    AbstractRuleUnit hospitalRuleUnit;
+    AbstractRuleUnit<HospitalRuleService> hospitalRuleUnit;
 
     @Autowired
     HospitalRuleService hospitalRuleService;
@@ -38,7 +38,8 @@ public class Receiver {
         LOGGER.info("received hospital='{}'", hospital.toString());
 
         hospitalRuleService.getHospitalsInStream().append(hospital);
-        RuleUnitInstance hospitalRuleUnitInstance = hospitalRuleUnit.createInstance(hospitalRuleService);
+        RuleUnitInstance<HospitalRuleService> hospitalRuleUnitInstance = hospitalRuleUnit
+                .createInstance(hospitalRuleService);
         hospitalRuleUnitInstance.fire();
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
