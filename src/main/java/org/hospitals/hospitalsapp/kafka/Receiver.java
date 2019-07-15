@@ -3,10 +3,8 @@ package org.hospitals.hospitalsapp.kafka;
 import java.util.concurrent.CountDownLatch;
 
 import org.hospitals.hospitalsapp.data.Hospital;
+import org.hospitals.hospitalsapp.process.HospitalProcessComponent;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
-import org.hospitals.hospitalsapp.rules.HospitalRuleService;
-import org.kie.kogito.rules.RuleUnitInstance;
-import org.kie.kogito.rules.impl.AbstractRuleUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,7 @@ public class Receiver {
     HospitalRepository hospitalRepository;
 
     @Autowired
-    AbstractRuleUnit<HospitalRuleService> hospitalRuleUnit;
-
-    @Autowired
-    HospitalRuleService hospitalRuleService;
+    HospitalProcessComponent hospitalProcessComponent;
 
     private CountDownLatch latch = new CountDownLatch(1);
 
@@ -37,10 +32,8 @@ public class Receiver {
     public void receive(Hospital hospital) {
         LOGGER.info("received hospital='{}'", hospital.toString());
 
-        hospitalRuleService.getHospitalsInStream().append(hospital);
-        RuleUnitInstance<HospitalRuleService> hospitalRuleUnitInstance = hospitalRuleUnit
-                .createInstance(hospitalRuleService);
-        hospitalRuleUnitInstance.fire();
+        // kogito -- start process
+        hospitalProcessComponent.startHospitalsAddProcess(hospital);
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
         Hospital foundHospital = hospitalMonoResult.block();

@@ -54,6 +54,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
+		<!-- kogito -->
+		<dependency>
+			<groupId>org.kie.kogito</groupId>
+			<artifactId>kogito-api</artifactId>
+			<version>${kogito.version}</version>
+		</dependency>
 		<!-- kogito - drools -->
 		<dependency>
 			<groupId>org.kie.kogito</groupId>
@@ -79,6 +85,12 @@
 					<artifactId>xstream</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<!-- kogito -jbpm -->
+		<dependency>
+			<groupId>org.kie.kogito</groupId>
+			<artifactId>jbpm-flow</artifactId>
+			<version>${kogito.version}</version>
 		</dependency>
 		
 		<!-- test -->
@@ -120,28 +132,6 @@
 							<sources>
 								<source>${basedir}/target/generated-sources/kogito</source>
 							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/generated-sources/kogito/org</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/target/generated-sources/kogito/src/main/java/org</directory>
-									<filtering>false</filtering>
-								</resource>
-							</resources>
 						</configuration>
 					</execution>
 				</executions>
