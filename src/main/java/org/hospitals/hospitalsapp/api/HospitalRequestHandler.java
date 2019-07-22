@@ -33,7 +33,7 @@ public class HospitalRequestHandler {
                 .body(hospitalService.getHospitals(), Hospital.class).switchIfEmpty(ServerResponse.notFound().build());
     }
 
-    public Mono<ServerResponse> put(ServerRequest request) {
+    public Mono<ServerResponse> post(ServerRequest request) {
         Mono<Hospital> hospital = request.bodyToMono(Hospital.class);
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(hospitalService.addHospital(hospital),
                 Hospital.class);
