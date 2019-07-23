@@ -6,21 +6,16 @@ import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.data.Patient;
 import org.hospitals.hospitalsapp.kafka.Sender;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.kafka.test.context.EmbeddedKafka;
-import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -36,16 +31,16 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = HospitalsApplication.class)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, topics = { "${kafka.topic.hospital}" })
+@EmbeddedKafka(partitions = 1, topics = { "hospital" })
 public class HospitalsAppTest {
 
     @LocalServerPort
     int port;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         hospitalRepository.deleteAll().block();
         RestAssured.port = port;
@@ -57,10 +52,7 @@ public class HospitalsAppTest {
     @Autowired
     private Sender sender;
 
-    @ClassRule
-    public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, true, "hospital");
-
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         hospitalRepository.deleteAll().block();
     }

@@ -13,7 +13,6 @@ public class HospitalController {
     @Autowired
     HospitalService hospitalService;
 
-
     @GetMapping("/")
     Rendering index() {
         return Rendering.view("index")
