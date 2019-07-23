@@ -18,6 +18,10 @@ public class Hospital implements Serializable {
     public Hospital() {
     }
 
+    public Hospital(Hospital old) {
+
+    }
+
     public Hospital(String id,
                     String name,
                     String address,

@@ -12,8 +12,10 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
@@ -240,5 +242,37 @@ public class HospitalsAppTest {
                       "[0].id",
                       is("piedmont"));
 
+    }
+    @Test()
+    public void testGetHospitalsGraphql() throws Exception {
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
+
+        sender.send(hospital1);
+        sender.send(hospital2);
+
+        Thread.sleep(5000);
+
+        String testQuery = "{\n" +
+                    "\thospitals{\n" +
+                    "\t\tname\n" +
+                    "\t\tzip\n" +
+                    "\t}\n" +
+                "}";
+
+        String result = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(testQuery).when().post("/graphql/hospitals").then().statusCode(200)
+                .body("hospitals.size()",
+                      is(2),
+                      "hospitals[0].zip",
+                      is(30040),
+                      "hospitals[0].name",
+                      is("Northside Hospital"),
+                      "hospitals[1].zip",
+                      is(30040),
+                      "hospitals[1].name",
+                      is("Piedmont Hospital"))
+                .extract().asString();
+
+        assertEquals("{\"hospitals\":[{\"name\":\"Northside Hospital\",\"zip\":30040},{\"name\":\"Piedmont Hospital\",\"zip\":30040}]}", result);
     }
 }

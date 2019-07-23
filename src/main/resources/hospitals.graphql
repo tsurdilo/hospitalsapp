@@ -1,0 +1,43 @@
+schema {
+    query:Query
+}
+
+type Query{
+    hospitals: [Hospital]
+    hospital(id:String): Hospital
+    #patients: [Patient]
+    #patient(id:String): Patient
+    #treatments: [Treatment]
+    #tests: [Test]
+}
+
+type Hospital{
+    id:String
+    name:String
+    address:String
+    zip:Int
+    patients:[Patient]
+}
+
+type Patient{
+    id:String
+    firstName:String
+    lastName:String
+    address:String
+    zip:Int
+    treatments:[Treatment]
+}
+
+type Treatment{
+    name:String
+    ongoing:Boolean
+    performedOn:String
+    tests:[Test]
+}
+
+type Test{
+    name:String
+    ongoing:Boolean
+    data:[String]
+}
+

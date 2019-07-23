@@ -19,6 +19,8 @@
 		<!--<kogito.di.enabled>false</kogito.di.enabled>-->
 		<camel.version>2.24.1</camel.version>
 		<springboot.version>2.2.0.M4</springboot.version>
+		<graphql.starter.version>3.6.0</graphql.starter.version>
+		<graphql.java.tools.version>3.2.0</graphql.java.tools.version>
 	</properties>
 	
 	<dependencies>
@@ -37,6 +39,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>${springboot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-spring-boot-starter</artifactId>
+			<version>${graphql.starter.version}</version>
+		</dependency>
+		<!-- graphql -->
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java-tools</artifactId>
+			<version>${graphql.java.tools.version}</version>
 		</dependency>
 		<!-- camel -->
 		<dependency>

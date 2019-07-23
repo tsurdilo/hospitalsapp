@@ -1,6 +1,11 @@
 package org.hospitals.hospitalsapp.api;
 
+
+import java.util.LinkedHashMap;
+
+import graphql.ExecutionResult;
 import org.hospitals.hospitalsapp.data.Hospital;
+import org.hospitals.hospitalsapp.graphql.HospitalGraphQLService;
 import org.hospitals.hospitalsapp.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,6 +20,9 @@ public class HospitalRequestHandler {
 
     @Autowired
     HospitalService hospitalService;
+
+    @Autowired
+    HospitalGraphQLService hospitalGraphQLService;
 
     public Mono<ServerResponse> stream(ServerRequest request) {
         return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM)
@@ -43,6 +51,16 @@ public class HospitalRequestHandler {
         String id = request.pathVariable("id");
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(hospitalService.deleteById(id),
                 Void.class);
+    }
+
+    public Mono<ServerResponse> getHospitalsGraphql(ServerRequest request) {
+        Mono<String> body = request.bodyToMono(String.class);
+
+        return body.flatMap(b -> {
+            ExecutionResult execute = hospitalGraphQLService.getGraphQL().execute(b.toString());
+            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(Mono.just(execute.getData()),
+                                                                                    LinkedHashMap.class);
+        });
     }
 
 }

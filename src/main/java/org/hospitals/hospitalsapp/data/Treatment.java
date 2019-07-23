@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Treatment implements Serializable {
     private String name;
-    private boolean isOngoing;
-    private Date performedOn;
+    private boolean ongoing;
+    private String performedOn;
     private List<Test> tests;
 
     public Treatment() {
@@ -16,11 +16,11 @@ public class Treatment implements Serializable {
     }
 
     public Treatment(String name,
-                     boolean isOngoing,
-                     Date performedOn,
+                     boolean ongoing,
+                     String performedOn,
                      List<Test> tests) {
         this.name = name;
-        this.isOngoing = isOngoing;
+        this.ongoing = ongoing;
         this.performedOn = performedOn;
         this.tests = tests;
     }
@@ -34,18 +34,18 @@ public class Treatment implements Serializable {
     }
 
     public boolean isOngoing() {
-        return isOngoing;
+        return ongoing;
     }
 
     public void setOngoing(boolean ongoing) {
-        isOngoing = ongoing;
+        this.ongoing = ongoing;
     }
 
-    public Date getPerformedOn() {
+    public String getPerformedOn() {
         return performedOn;
     }
 
-    public void setPerformedOn(Date performedOn) {
+    public void setPerformedOn(String performedOn) {
         this.performedOn = performedOn;
     }
 
