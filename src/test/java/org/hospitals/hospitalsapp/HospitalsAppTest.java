@@ -117,7 +117,7 @@ public class HospitalsAppTest {
         hospitalRepository.deleteAll().block();
         sender.send(hospital);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
         assertNotNull(hospitalFlux);
@@ -138,7 +138,7 @@ public class HospitalsAppTest {
         sender.send(hospital1);
         sender.send(hospital2);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
         assertNotNull(hospitalFlux);
@@ -160,7 +160,7 @@ public class HospitalsAppTest {
         sender.send(hospital1);
         sender.send(hospital2);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         given().accept(ContentType.JSON).when().get("/hospitalsall").then().statusCode(200)
                 .body("$.size()",
@@ -180,7 +180,7 @@ public class HospitalsAppTest {
         sender.send(hospital1);
         sender.send(hospital2);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
 
         String firstHospitalId = given().contentType(ContentType.JSON).accept(ContentType.JSON).when()
@@ -231,7 +231,7 @@ public class HospitalsAppTest {
         sender.send(hospital1);
         sender.send(hospital2);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         // delete first
         given().accept(ContentType.JSON).when().delete("/hospitals/northside").then().statusCode(200);
@@ -251,7 +251,7 @@ public class HospitalsAppTest {
         sender.send(hospital1);
         sender.send(hospital2);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         String testQuery = "{\n" +
                     "\thospitals{\n" +
