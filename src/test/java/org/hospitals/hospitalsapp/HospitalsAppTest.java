@@ -255,12 +255,12 @@ public class HospitalsAppTest {
 
         String testQuery = "{\n" +
                     "\thospitals{\n" +
-                    "\t\tname\n" +
-                    "\t\tzip\n" +
+                    "\tname\n" +
+                    "\tzip\n" +
                     "\t}\n" +
                 "}";
 
-        String result = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(testQuery).when().post("/graphql/hospitals").then().statusCode(200)
+        String result = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(testQuery).when().post("/queryhospitals").then().statusCode(200)
                 .body("hospitals.size()",
                       is(2),
                       "hospitals[0].zip",
@@ -274,5 +274,33 @@ public class HospitalsAppTest {
                 .extract().asString();
 
         assertEquals("{\"hospitals\":[{\"name\":\"Northside Hospital\",\"zip\":30040},{\"name\":\"Piedmont Hospital\",\"zip\":30040}]}", result);
+    }
+
+    @Test
+    public void testGetSingleHospitalGraphql() throws Exception {
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
+
+        sender.send(hospital1);
+        sender.send(hospital2);
+
+        Thread.sleep(3000);
+
+        String testQuery = "{\n" +
+                "\thospital(id:\"piedmont\"){\n" +
+                "\tname\n" +
+                "\tzip\n" +
+                "\t}\n" +
+                "}";
+
+        String result = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(testQuery).when().post("/queryhospitals").then().statusCode(200)
+                .body("hospital.zip",
+                      is(30040),
+                      "hospital.name",
+                      is("Piedmont Hospital"))
+                .extract().asString();
+
+        assertEquals("{\"hospital\":{\"name\":\"Piedmont Hospital\",\"zip\":30040}}", result);
+
     }
 }

@@ -19,7 +19,7 @@ public class HospitalRequestRouter {
                 .andRoute(POST("/hospitals/{id}").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
                         requestHandler::post)
                 .andRoute(DELETE("/hospitals/{id}"), requestHandler::delete)
-                .andRoute(POST("/graphql/hospitals").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
+                .andRoute(POST("/queryhospitals").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
                   requestHandler::getHospitalsGraphql);
     }
 }
