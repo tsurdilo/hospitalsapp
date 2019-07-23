@@ -1,5 +1,7 @@
 package org.hospitals.hospitalsapp.service;
 
+import java.time.Duration;
+
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class HospitalService {
     HospitalRepository hospitalRepository;
 
     public Flux<Hospital> streamHospitals() {
-        return hospitalRepository.findAll();
+        return hospitalRepository.findAll().delayElements(Duration.ofSeconds(2));
 
     }
 

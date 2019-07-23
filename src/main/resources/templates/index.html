@@ -15,7 +15,7 @@
 
         <div class="row">
             <div id="title">
-                <h1>Hospitals App Test</h1>
+                <h1>Available Hospitals</h1>
             </div>
 
             <table id="hospitals" class="table table-striped">
@@ -28,11 +28,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="result" data-th-each="hospitals : ${hospital}">
-                        <td>[[${hospital.id}]]</td>
-                        <td>[[${hospital.name}]]</td>
-                        <td>[[${hospital.address}]]</td>
-                        <td>[[${hospital.zip}]]</td>
+                    <tr class="result" data-th-each="h : ${hospital}">
+                        <td>[[${h.id}]]</td>
+                        <td>[[${h.name}]]</td>
+                        <td>[[${h.address}]]</td>
+                        <td>[[${h.zip}]]</td>
                     </tr>
                 </tbody>
             </table>
@@ -40,7 +40,7 @@
 
     </div>
 
-    <script data-th-src="@{/js/main.js}"></script>
+    <!--<script data-th-src="@{/js/main.js}"></script>-->
 
 </body>
 
