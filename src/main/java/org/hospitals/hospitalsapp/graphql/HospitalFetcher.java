@@ -17,13 +17,7 @@ public class HospitalFetcher implements DataFetcher<Hospital>  {
 
     @Override
     public Hospital get(DataFetchingEnvironment dataFetchingEnvironment) {
-
-        System.out.println("******************* In SINGLE HOSPUTAL FETCHER!!!!!");
-
         String id = dataFetchingEnvironment.getArgument("id");
-
-        System.out.println("************** ID IS: " + id);
-
         CompletableFuture<Hospital> hospitalFuture = hospitalRepository.findById(id).toFuture();
 
         try {

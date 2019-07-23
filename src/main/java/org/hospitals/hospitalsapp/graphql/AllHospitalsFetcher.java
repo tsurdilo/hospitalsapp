@@ -19,9 +19,6 @@ public class AllHospitalsFetcher implements DataFetcher<List<Hospital>> {
     @Override
     public List<Hospital> get(DataFetchingEnvironment dataFetchingEnvironment) {
 
-
-        System.out.println("*************** IN ALL HOSPITALS FETCHER!");
-
         CompletableFuture<List<Hospital>> retList = hospitalRepository.findAll().collectList().toFuture();
 
         try {
