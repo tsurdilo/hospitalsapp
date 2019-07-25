@@ -2,6 +2,7 @@ package org.hospitals.hospitalsapp;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.hospitals.hospitalsapp.data.Doctor;
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.data.Patient;
 import org.hospitals.hospitalsapp.kafka.Sender;
@@ -60,14 +61,14 @@ public class HospitalsAppTest {
     @Test
     public void testSaveHospital() {
         Hospital hospital = hospitalRepository
-                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, null)).block();
+                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, "", null)).block();
         assertNotNull(hospital.getId());
     }
 
     @Test
     public void testfindHospitalById() {
         Mono<Hospital> hospitalMono = hospitalRepository
-                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, null));
+                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, "", null));
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospitalMono.block().getId());
         assertNotNull(hospitalMonoResult.block().getId());
         assertEquals(hospitalMonoResult.block().getName(), "Northside Hospital");
@@ -76,9 +77,9 @@ public class HospitalsAppTest {
     @Test
     public void testFindAllHospitals() {
         Hospital hospital1 = hospitalRepository
-                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, null)).block();
+                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, "", null)).block();
         Hospital hospital2 = hospitalRepository
-                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, null)).block();
+                .save(new Hospital("northside", "Northside Hospital", "some address", 30040, "", null)).block();
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
         List<Hospital> hospitals = hospitalFlux.collectList().block();
         assertTrue(hospitals.stream().anyMatch(x -> hospital1.getId().equals(x.getId())));
@@ -86,25 +87,35 @@ public class HospitalsAppTest {
     }
 
     @Test
-    public void testFindAllHospitalsWithPatients() {
-        Patient patient1 = new Patient("123", "Michael", "Jordan", "address", 12345, null);
-        Patient patient2 = new Patient("123", "Charles", "Barkley", "address", 12345, null);
-        Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 30040,
-                Stream.of(patient1, patient2).collect(Collectors.toCollection(ArrayList<Patient>::new)));
+    public void testFindAllHospitalsWithDoctorsAndPatients() {
+        Doctor doctor1 = new Doctor("123", "Michael", "Jordan", 33, "", null, null);
+        Doctor doctor2 = new Doctor("123", "Charles", "Barkley", 45, "", null, null);
+
+        Patient patient1 = new Patient("234", "Allan", "Iverson", "someaddress", 30040, null);
+        Patient patient2 = new Patient("234", "John", "Starks", "someaddress", 30040, null);
+
+        doctor1.setPatients(Stream.of(patient1, patient2).collect(Collectors.toCollection(ArrayList<Patient>::new)));
+        doctor2.setPatients(Stream.of(patient1, patient2).collect(Collectors.toCollection(ArrayList<Patient>::new)));
+
+
+        Hospital hospital = new Hospital("northside", "Northside Hospital", "some address", 30040,"",
+                                         Stream.of(doctor1, doctor2).collect(Collectors.toCollection(ArrayList<Doctor>::new)));
 
         Mono<Hospital> hospitalMono = hospitalRepository.save(hospital);
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospitalMono.block().getId());
         assertNotNull(hospitalMonoResult.block().getId());
         assertEquals(hospitalMonoResult.block().getName(), "Northside Hospital");
-        assertNotNull(hospitalMonoResult.block().getPatients());
-        assertEquals(2, hospitalMonoResult.block().getPatients().size());
+        assertNotNull(hospitalMonoResult.block().getDoctors());
+        assertEquals(2, hospitalMonoResult.block().getDoctors().size());
+        assertEquals(2, hospitalMonoResult.block().getDoctors().get(0).getPatients().size());
+        assertEquals(2, hospitalMonoResult.block().getDoctors().get(1).getPatients().size());
 
     }
 
     @Test
     public void testKafkaMessageStores() throws InterruptedException {
-        Hospital hospital = new Hospital("12345", "Northside Hospital", "some address", 0000, null);
+        Hospital hospital = new Hospital("12345", "Northside Hospital", "some address", 0000, "", null);
 
         hospitalRepository.deleteAll().block();
         sender.send(hospital);
@@ -124,8 +135,8 @@ public class HospitalsAppTest {
 
     @Test
     public void testKafkaMessageMultiStores() throws InterruptedException {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -146,8 +157,8 @@ public class HospitalsAppTest {
 
     @Test
     public void testHospitalGetAll() throws InterruptedException {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -166,8 +177,8 @@ public class HospitalsAppTest {
 
     @Test
     public void testHospitalGetById() throws Exception {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -194,7 +205,7 @@ public class HospitalsAppTest {
 
     @Test
     public void testPutNewHospital() throws Exception {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, "", null);
 
 
         // create hospital
@@ -217,8 +228,8 @@ public class HospitalsAppTest {
 
     @Test()
     public void testAddThenDeleteHospital() throws Exception {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 30040, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 30040, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -237,8 +248,8 @@ public class HospitalsAppTest {
     }
     @Test()
     public void testGetHospitalsGraphql() throws Exception {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);
@@ -270,8 +281,8 @@ public class HospitalsAppTest {
 
     @Test
     public void testGetSingleHospitalGraphql() throws Exception {
-        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, null);
-        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, null);
+        Hospital hospital1 = new Hospital("northside", "Northside Hospital", "some address", 0000, "", null);
+        Hospital hospital2 = new Hospital("piedmont", "Piedmont Hospital", "some address", 0000, "", null);
 
         sender.send(hospital1);
         sender.send(hospital2);

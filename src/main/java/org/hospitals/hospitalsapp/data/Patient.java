@@ -79,4 +79,16 @@ public class Patient implements Serializable {
     public void setTreatments(List<Treatment> treatments) {
         this.treatments = treatments;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", zip=" + zip +
+                ", treatments=" + treatments +
+                '}';
+    }
 }

@@ -16,6 +16,17 @@ type Hospital{
     name:String
     address:String
     zip:Int
+    img:String
+    doctors:[Doctor]
+}
+
+type Doctor{
+    id:String
+    firstName:String
+    lastName:String
+    age:Int
+    img:String
+    specializations:[String]
     patients:[Patient]
 }
 
@@ -29,6 +40,7 @@ type Patient{
 }
 
 type Treatment{
+    id:String
     name:String
     ongoing:Boolean
     performedOn:String
@@ -36,6 +48,7 @@ type Treatment{
 }
 
 type Test{
+    id:String
     name:String
     ongoing:Boolean
     data:[String]

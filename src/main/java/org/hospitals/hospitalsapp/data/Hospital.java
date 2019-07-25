@@ -13,7 +13,8 @@ public class Hospital implements Serializable {
     private String name;
     private String address;
     private int zip;
-    private List<Patient> patients;
+    private String img;
+    private List<Doctor> doctors;
 
     public Hospital() {
     }
@@ -22,12 +23,14 @@ public class Hospital implements Serializable {
                     String name,
                     String address,
                     int zip,
-                    List<Patient> patients) {
+                    String img,
+                    List<Doctor> doctors) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.zip = zip;
-        this.patients = patients;
+        this.img = img;
+        this.doctors = doctors;
     }
 
     public String getId() {
@@ -62,12 +65,20 @@ public class Hospital implements Serializable {
         this.zip = zip;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
+    public List<Doctor> getDoctors() {
+        return doctors;
     }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
@@ -77,7 +88,8 @@ public class Hospital implements Serializable {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", zip=" + zip +
-                ", patients=" + patients +
+                ", img='" + img + '\'' +
+                ", doctors=" + doctors +
                 '}';
     }
 }

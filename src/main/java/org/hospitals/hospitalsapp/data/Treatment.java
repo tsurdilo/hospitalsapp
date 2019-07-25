@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 
 public class Treatment implements Serializable {
+    @Id
+    private String id;
     private String name;
     private boolean ongoing;
     private String performedOn;
@@ -15,7 +18,8 @@ public class Treatment implements Serializable {
 
     }
 
-    public Treatment(String name,
+    public Treatment(String id,
+                     String name,
                      boolean ongoing,
                      String performedOn,
                      List<Test> tests) {
@@ -23,6 +27,14 @@ public class Treatment implements Serializable {
         this.ongoing = ongoing;
         this.performedOn = performedOn;
         this.tests = tests;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -55,5 +67,16 @@ public class Treatment implements Serializable {
 
     public void setTests(List<Test> tests) {
         this.tests = tests;
+    }
+
+    @Override
+    public String toString() {
+        return "Treatment{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", ongoing=" + ongoing +
+                ", performedOn='" + performedOn + '\'' +
+                ", tests=" + tests +
+                '}';
     }
 }

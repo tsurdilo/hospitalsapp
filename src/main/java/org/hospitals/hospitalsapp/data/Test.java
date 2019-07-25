@@ -3,7 +3,11 @@ package org.hospitals.hospitalsapp.data;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
 public class Test implements Serializable {
+    @Id
+    private String id;
     public String name;
     public boolean ongoing;
     public List<String> data;
@@ -12,12 +16,21 @@ public class Test implements Serializable {
 
     }
 
-    public Test(String name,
+    public Test(String id,
+                String name,
                 boolean ongoing,
                 List<String> data) {
         this.name = name;
         this.ongoing = ongoing;
         this.data = data;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -42,5 +55,15 @@ public class Test implements Serializable {
 
     public void setData(List<String> data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", ongoing=" + ongoing +
+                ", data=" + data +
+                '}';
     }
 }

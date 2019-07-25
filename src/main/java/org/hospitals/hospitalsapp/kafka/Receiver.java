@@ -41,7 +41,8 @@ public class Receiver {
             foundHospital.setAddress(hospital.getAddress());
             foundHospital.setName(hospital.getName());
             foundHospital.setZip(hospital.getZip());
-            foundHospital.setPatients(hospital.getPatients());
+            foundHospital.setImg(hospital.getImg());
+            foundHospital.setDoctors(hospital.getDoctors());
 
             hospitalRepository.save(foundHospital).block();
         } else {
