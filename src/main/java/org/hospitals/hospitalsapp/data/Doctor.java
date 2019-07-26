@@ -5,20 +5,24 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 
 public class Doctor {
+
     @Id
     private String id;
     private String firstName;
     private String lastName;
+    private String title;
     private int age;
     private String img;
     private List<String> specializations;
     private List<Patient> patients;
 
-    public Doctor() {}
+    public Doctor() {
+    }
 
     public Doctor(String id,
                   String firstName,
                   String lastName,
+                  String title,
                   int age,
                   String img,
                   List<String> specializations,
@@ -26,6 +30,7 @@ public class Doctor {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.title = title;
         this.age = age;
         this.img = img;
         this.specializations = specializations;
@@ -88,16 +93,25 @@ public class Doctor {
         this.img = img;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", title='" + title + '\'' +
                 ", age=" + age +
+                ", img='" + img + '\'' +
                 ", specializations=" + specializations +
                 ", patients=" + patients +
-                ", img='" + img + '\'' +
                 '}';
     }
 }

@@ -14,6 +14,7 @@ public class Sender {
     private String hospitalTopicName;
 
     public void send(Hospital hospital) {
-        kafkaTemplate.send(hospitalTopicName, hospital);
+        kafkaTemplate.send(hospitalTopicName,
+                           hospital);
     }
 }

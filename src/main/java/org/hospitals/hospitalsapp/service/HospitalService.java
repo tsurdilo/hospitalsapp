@@ -6,7 +6,6 @@ import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -18,7 +17,6 @@ public class HospitalService {
 
     public Flux<Hospital> streamHospitals() {
         return hospitalRepository.findAll().delayElements(Duration.ofSeconds(2));
-
     }
 
     public Mono<Hospital> getHospital(String id) {
@@ -27,7 +25,6 @@ public class HospitalService {
 
     public Flux<Hospital> getHospitals() {
         return hospitalRepository.findAll();
-
     }
 
     public Mono<Hospital> addHospital(Mono<Hospital> hospital) {
@@ -39,5 +36,4 @@ public class HospitalService {
     public Mono<Void> deleteById(String id) {
         return hospitalRepository.deleteById(id);
     }
-
 }

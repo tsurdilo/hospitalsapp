@@ -20,7 +20,8 @@ public class HospitalProcessComponent {
         Process<? extends Model> p = kogitoApp.processes().processById("hospitals.add");
 
         Model m = p.createModel();
-        m.fromMap(Collections.singletonMap("hospital", hospital));
+        m.fromMap(Collections.singletonMap("hospital",
+                                           hospital));
 
         ProcessInstance<?> processInstance = p.createInstance(m);
 

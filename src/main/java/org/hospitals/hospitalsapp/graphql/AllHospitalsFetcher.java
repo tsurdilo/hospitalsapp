@@ -23,7 +23,7 @@ public class AllHospitalsFetcher implements DataFetcher<List<Hospital>> {
 
         try {
             return retList.get();
-        } catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

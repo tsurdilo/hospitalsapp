@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Hospital implements Serializable {
+
     @Id
     private String id;
     private String name;

@@ -4,12 +4,12 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.hospitals.hospitalsapp.data.Hospital;
+import org.hospitals.hospitalsapp.kafka.Sender;
 import org.hospitals.hospitalsapp.util.HospitalGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.hospitals.hospitalsapp.data.Hospital;
-import org.hospitals.hospitalsapp.kafka.Sender;
 
 @Component
 public class HospitalGeneratorRoute extends RouteBuilder {
@@ -42,5 +42,4 @@ public class HospitalGeneratorRoute extends RouteBuilder {
             }
         });
     }
-
 }

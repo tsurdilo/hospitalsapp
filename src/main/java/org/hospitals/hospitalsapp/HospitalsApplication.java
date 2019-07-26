@@ -3,7 +3,6 @@ package org.hospitals.hospitalsapp;
 import java.util.Arrays;
 
 import com.mongodb.reactivestreams.client.MongoClient;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -18,39 +17,42 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
-@ComponentScan({ "org.hospitals", "org.drools.project" })
+@ComponentScan({"org.hospitals", "org.drools.project"})
 public class HospitalsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HospitalsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HospitalsApplication.class,
+                              args);
+    }
 
-	@Autowired
-	MongoClient mongoClient;
+    @Autowired
+    MongoClient mongoClient;
 
-	@Value("${hospitalapp.mongo.dbname}")
-	String dbName;
+    @Value("${hospitalapp.mongo.dbname}")
+    String dbName;
 
-	@Bean
-	public ReactiveMongoTemplate reactiveMongoTemplate() {
-		return  new ReactiveMongoTemplate(mongoClient, dbName);
-	}
+    @Bean
+    public ReactiveMongoTemplate reactiveMongoTemplate() {
+        return new ReactiveMongoTemplate(mongoClient,
+                                         dbName);
+    }
 
-	@Bean
-	CorsWebFilter corsWebFilter() {
-		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOrigins(Arrays.asList("*"));
-		corsConfig.setAllowedHeaders(Arrays.asList("*"));
-		corsConfig.setMaxAge(8000L);
-		corsConfig.addAllowedMethod("OPTIONS");
-		corsConfig.addAllowedMethod("GET");
-		corsConfig.addAllowedMethod("POST");
-		corsConfig.addAllowedMethod("PUT");
-		corsConfig.addAllowedMethod("DELETE");
+    @Bean
+    CorsWebFilter corsWebFilter() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.setAllowedOrigins(Arrays.asList("*"));
+        corsConfig.setAllowedHeaders(Arrays.asList("*"));
+        corsConfig.setMaxAge(8000L);
+        corsConfig.addAllowedMethod("OPTIONS");
+        corsConfig.addAllowedMethod("GET");
+        corsConfig.addAllowedMethod("POST");
+        corsConfig.addAllowedMethod("PUT");
+        corsConfig.addAllowedMethod("DELETE");
 
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",
+                                         corsConfig);
 
-		return new CorsWebFilter(source);
-	}
+        return new CorsWebFilter(source);
+    }
 }

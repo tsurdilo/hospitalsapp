@@ -24,6 +24,7 @@ type Doctor{
     id:String
     firstName:String
     lastName:String
+    title:String
     age:Int
     img:String
     specializations:[String]

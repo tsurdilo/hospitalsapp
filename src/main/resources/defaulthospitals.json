@@ -1,0 +1,149 @@
+[
+  {
+    "id": "h1",
+    "name": "Northside Hospital",
+    "address": "1200 Northside Forsyth Dr, Cumming, GA",
+    "zip": 30041,
+    "img": "",
+    "doctors": [
+      {
+        "id": "h1p1",
+        "firstName": "Carlos",
+        "lastName": "Franco",
+        "title": "MD, FACP",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h1p2",
+        "firstName": "Jorge",
+        "lastName": "Leguizamo",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h1p3",
+        "firstName": "Sreekanth",
+        "lastName": "Reddy",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h1p4",
+        "firstName": "Mary",
+        "lastName": "Subbannan",
+        "title": "Georgia Cancer Specialists",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      }
+    ]
+  },
+  {
+    "id": "h2",
+    "name": "Piedmont Hospital",
+    "address": "1968 Peachtreet St NW, Atlanta, GA",
+    "zip": 30309,
+    "img": "",
+    "doctors": [
+      {
+        "id": "h2p1",
+        "firstName": "Jonathan",
+        "lastName": "Bend",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h2p2",
+        "firstName": "Trevor",
+        "lastName": "Feinstein",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h2p3",
+        "firstName": "Chad",
+        "lastName": "Levitt",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h2p4",
+        "firstName": "Ha",
+        "lastName": "Tran",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      }
+    ]
+  },
+  {
+    "id": "h3",
+    "name": "Emory Hospital",
+    "address": "1364 Clifton Rd NE Atlanta, GA",
+    "zip": 30322,
+    "img": "",
+    "doctors": [
+      {
+        "id": "h3p1",
+        "firstName": "Ana",
+        "lastName": "Antun",
+        "title": "MD, MSc",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h3p2",
+        "firstName": "David",
+        "lastName": "Berkowitz",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h3p3",
+        "firstName": "Kunal",
+        "lastName": "Bhatt",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      },
+      {
+        "id": "h3p4",
+        "firstName": "Hark",
+        "lastName": "Chang",
+        "title": "MD",
+        "age": 45,
+        "img": "",
+        "specializations": [],
+        "patients": []
+      }
+    ]
+  }
+]

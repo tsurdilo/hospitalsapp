@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-
 import reactor.core.publisher.Mono;
 
 public class Receiver {
@@ -30,7 +29,8 @@ public class Receiver {
 
     @KafkaListener(topics = "${kafka.topic.hospital}")
     public void receive(Hospital hospital) {
-        LOGGER.info("received hospital='{}'", hospital.toString());
+        LOGGER.info("received hospital='{}'",
+                    hospital.toString());
 
         // kogito -- start process
         hospitalProcessComponent.startHospitalsAddProcess(hospital);
@@ -50,5 +50,4 @@ public class Receiver {
         }
         latch.countDown();
     }
-
 }

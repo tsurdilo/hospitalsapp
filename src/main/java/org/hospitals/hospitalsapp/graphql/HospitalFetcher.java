@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HospitalFetcher implements DataFetcher<Hospital>  {
+public class HospitalFetcher implements DataFetcher<Hospital> {
 
     @Autowired
     HospitalRepository hospitalRepository;
@@ -22,10 +22,8 @@ public class HospitalFetcher implements DataFetcher<Hospital>  {
 
         try {
             return hospitalFuture.get();
-        } catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
-
-
     }
 }

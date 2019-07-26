@@ -4,9 +4,7 @@ import org.hospitals.hospitalsapp.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.reactive.result.view.Rendering;
 import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
 import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 
@@ -26,13 +24,12 @@ public class HospitalController {
     public String index(final Model model) {
 
         IReactiveDataDriverContextVariable reactiveHospitalsInfo =
-                new ReactiveDataDriverContextVariable(hospitalService.streamHospitals(), 1);
+                new ReactiveDataDriverContextVariable(hospitalService.streamHospitals(),
+                                                      1);
 
-        model.addAttribute("hospital", reactiveHospitalsInfo);
+        model.addAttribute("hospital",
+                           reactiveHospitalsInfo);
 
         return "index";
-
     }
-
-
 }

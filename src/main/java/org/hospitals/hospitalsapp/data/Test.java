@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 
 public class Test implements Serializable {
+
     @Id
     private String id;
     public String name;
