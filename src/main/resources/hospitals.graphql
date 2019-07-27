@@ -46,6 +46,7 @@ type Treatment{
     ongoing:Boolean
     performedOn:String
     tests:[Test]
+    alerts:[Alert]
 }
 
 type Test{
@@ -53,5 +54,12 @@ type Test{
     name:String
     ongoing:Boolean
     data:[String]
+}
+
+type Alert{
+    id:String
+    title:String
+    message:String
+    action:String
 }
 

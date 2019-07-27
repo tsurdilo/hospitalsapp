@@ -13,6 +13,7 @@ public class Treatment implements Serializable {
     private boolean ongoing;
     private String performedOn;
     private List<Test> tests;
+    private List<Alert> alerts;
 
     public Treatment() {
 
@@ -22,11 +23,14 @@ public class Treatment implements Serializable {
                      String name,
                      boolean ongoing,
                      String performedOn,
-                     List<Test> tests) {
+                     List<Test> tests,
+                     List<Alert> alerts) {
+        this.id = id;
         this.name = name;
         this.ongoing = ongoing;
         this.performedOn = performedOn;
         this.tests = tests;
+        this.alerts = alerts;
     }
 
     public String getId() {
@@ -69,6 +73,14 @@ public class Treatment implements Serializable {
         this.tests = tests;
     }
 
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
     @Override
     public String toString() {
         return "Treatment{" +
@@ -77,6 +89,7 @@ public class Treatment implements Serializable {
                 ", ongoing=" + ongoing +
                 ", performedOn='" + performedOn + '\'' +
                 ", tests=" + tests +
+                ", alerts=" + alerts +
                 '}';
     }
 }

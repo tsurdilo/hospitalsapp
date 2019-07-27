@@ -21,6 +21,7 @@ public class Test implements Serializable {
                 String name,
                 boolean ongoing,
                 List<String> data) {
+        this.id = id;
         this.name = name;
         this.ongoing = ongoing;
         this.data = data;
