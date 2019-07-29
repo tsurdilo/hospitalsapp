@@ -3,9 +3,10 @@ package org.hospitals.hospitalsapp.controller;
 import org.hospitals.hospitalsapp.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.reactive.result.view.Rendering;
 import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 
 @Controller
@@ -14,22 +15,17 @@ public class HospitalController {
     @Autowired
     HospitalService hospitalService;
 
-//    @GetMapping("/")
-//    Rendering index() {
-//        return Rendering.view("index")
-//                .modelAttribute("hospital",new ReactiveDataDriverContextVariable(hospitalService.streamHospitals(), 1)).build();
-//    }
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    Rendering index() {
 
-    @RequestMapping("/")
-    public String index(final Model model) {
+        return Rendering.view("index")
+                .modelAttribute("hospitals",new ReactiveDataDriverContextVariable(hospitalService.getHospitals(), 10)).build();
+    }
 
-        IReactiveDataDriverContextVariable reactiveHospitalsInfo =
-                new ReactiveDataDriverContextVariable(hospitalService.streamHospitals(),
-                                                      1);
+    @RequestMapping(value = "/hospital/{hid}", method = RequestMethod.GET)
+    Rendering hospital(@PathVariable("hid") String hospitalid) {
 
-        model.addAttribute("hospital",
-                           reactiveHospitalsInfo);
-
-        return "index";
+        return Rendering.view("hospitalinfo")
+                .modelAttribute("hospital", hospitalService.getHospital(hospitalid)).build();
     }
 }

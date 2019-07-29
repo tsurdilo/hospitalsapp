@@ -63,6 +63,7 @@ public class HospitalsAppTest {
         Hospital hospital = hospitalRepository
                 .save(new Hospital("northside",
                                    "Northside Hospital",
+                                   "",
                                    "some address",
                                    30040,
                                    "",
@@ -75,6 +76,7 @@ public class HospitalsAppTest {
         Mono<Hospital> hospitalMono = hospitalRepository
                 .save(new Hospital("northside",
                                    "Northside Hospital",
+                                   "",
                                    "some address",
                                    30040,
                                    "",
@@ -90,6 +92,7 @@ public class HospitalsAppTest {
         Hospital hospital1 = hospitalRepository
                 .save(new Hospital("northside",
                                    "Northside Hospital",
+                                   "",
                                    "some address",
                                    30040,
                                    "",
@@ -97,6 +100,7 @@ public class HospitalsAppTest {
         Hospital hospital2 = hospitalRepository
                 .save(new Hospital("northside",
                                    "Northside Hospital",
+                                   "",
                                    "some address",
                                    30040,
                                    "",
@@ -146,6 +150,7 @@ public class HospitalsAppTest {
 
         Hospital hospital = new Hospital("northside",
                                          "Northside Hospital",
+                                         "",
                                          "some address",
                                          30040,
                                          "",
@@ -171,6 +176,7 @@ public class HospitalsAppTest {
     public void testKafkaMessageStores() throws InterruptedException {
         Hospital hospital = new Hospital("12345",
                                          "Northside Hospital",
+                                         "",
                                          "some address",
                                          0000,
                                          "",
@@ -198,12 +204,14 @@ public class HospitalsAppTest {
     public void testKafkaMessageMultiStores() throws InterruptedException {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",
@@ -234,12 +242,14 @@ public class HospitalsAppTest {
     public void testHospitalGetAll() throws InterruptedException {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
@@ -263,12 +273,14 @@ public class HospitalsAppTest {
     public void testHospitalGetById() throws Exception {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
@@ -300,6 +312,7 @@ public class HospitalsAppTest {
     public void testPutNewHospital() throws Exception {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
@@ -327,12 +340,14 @@ public class HospitalsAppTest {
     public void testAddThenDeleteHospital() throws Exception {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           30040,
                                           "",
@@ -357,12 +372,14 @@ public class HospitalsAppTest {
     public void testGetHospitalsGraphql() throws Exception {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",
@@ -401,12 +418,14 @@ public class HospitalsAppTest {
     public void testGetSingleHospitalGraphql() throws Exception {
         Hospital hospital1 = new Hospital("northside",
                                           "Northside Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
+                                          "",
                                           "some address",
                                           0000,
                                           "",

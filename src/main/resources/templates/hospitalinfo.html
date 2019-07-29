@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/general :: navbar">...</div>
+    <h2 th:text="${hospital.name}">Hospital name...</h2>
+</div>
+<div th:replace="fragments/general :: footer">...</div>
+<div th:replace="fragments/general :: jsincludes">...</div>

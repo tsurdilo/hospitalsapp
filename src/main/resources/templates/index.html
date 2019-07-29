@@ -1,47 +1,47 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link data-th-href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link data-th-href="@{/css/main.css}" rel="stylesheet">
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
 </head>
-
 <body>
-
 <div class="container">
-
-    <div class="row">
-        <div id="title">
-            <h1>Hospitals</h1>
-        </div>
-
-        <table id="hospitals" class="table table-striped">
-            <thead>
-            <tr>
-                <th width="20%">Id</th>
-                <th width="30%">Name</th>
-                <th width="30%">Address</th>
-                <th width="20%">Zip</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="result" data-th-each="h : ${hospital}">
-                <td>[[${h.id}]]</td>
-                <td>[[${h.name}]]</td>
-                <td>[[${h.address}]]</td>
-                <td>[[${h.zip}]]</td>
-            </tr>
-            </tbody>
-        </table>
+    <div th:replace="fragments/general :: navbar">...</div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-7">
+                    <div class="medica-about-text">
+                        <h2>Welcome to <span>Medica</span> Health Portal</h2>
+                        <p>Medica allows you to easily view hospital Medical Doctors specializing in cancer treatment,
+                        view patient information and observe their treatments and test results.</p>
+                        <p>Start by selecting a participating hospital from the list below:</p>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div th:each="hospital : ${hospitals}">
+                                <div class="col-12 mt-3">
+                                    <div class="card">
+                                        <div class="card-horizontal">
+                                            <div class="img-square-wrapper">
+                                                <a th:href="@{/hospital/__${hospital.id}__}"><img th:src="@{${hospital.img}}"></a>
+                                            </div>
+                                            <div class="card-body">
+                                                <a th:href="@{/hospital/__${hospital.id}__}"><h4 class="card-title" th:text="${hospital.name}">Card title</h4></a>
+                                                <p class="card-text" th:text="${hospital.desc}">Card description</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
-
+    </div>
 </div>
-
-<!--<script data-th-src="@{/js/main.js}"></script>-->
-
+<div th:replace="fragments/general :: footer">...</div>
+<div th:replace="fragments/general :: jsincludes">...</div>
 </body>
-
-</html>

@@ -2,9 +2,10 @@
   {
     "id": "h1",
     "name": "Northside Hospital",
+    "desc": "Northside Hospital Cancer Institute (NHCI) is the largest and most comprehensive cancer hospital network in Georgia and a leader in cancer care.",
     "address": "1200 Northside Forsyth Dr, Cumming, GA",
     "zip": 30041,
-    "img": "",
+    "img": "/img/northside-logo.png",
     "doctors": [
       {
         "id": "h1p1",
@@ -51,9 +52,10 @@
   {
     "id": "h2",
     "name": "Piedmont Hospital",
+    "desc": "Piedmont Cancer Center services include early detection, advanced diagnosis, targeted therapies, innovative clinical trials and a full range of support programs to help guide you through your cancer journey.",
     "address": "1968 Peachtreet St NW, Atlanta, GA",
     "zip": 30309,
-    "img": "",
+    "img": "/img/piedmont-logo.png",
     "doctors": [
       {
         "id": "h2p1",
@@ -100,9 +102,10 @@
   {
     "id": "h3",
     "name": "Emory Hospital",
+    "desc": "Emory Cancer Center  is a national leader in seeking out new ways to defeat cancer and in translating that knowledge into patient care.",
     "address": "1364 Clifton Rd NE Atlanta, GA",
     "zip": 30322,
-    "img": "",
+    "img": "/img/emory-logo.png",
     "doctors": [
       {
         "id": "h3p1",

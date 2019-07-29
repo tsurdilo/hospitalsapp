@@ -28,6 +28,7 @@ public class HospitalGeneratorUtil {
     private static Hospital genrateRandomHospital(int counter) {
         return new Hospital(generateRandomName(),
                             "New Hospital " + counter,
+                            "",
                             "some address",
                             0000,
                             "",

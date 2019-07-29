@@ -12,6 +12,7 @@ public class Hospital implements Serializable {
     @Id
     private String id;
     private String name;
+    private String desc;
     private String address;
     private int zip;
     private String img;
@@ -22,12 +23,14 @@ public class Hospital implements Serializable {
 
     public Hospital(String id,
                     String name,
+                    String desc,
                     String address,
                     int zip,
                     String img,
                     List<Doctor> doctors) {
         this.id = id;
         this.name = name;
+        this.desc = desc;
         this.address = address;
         this.zip = zip;
         this.img = img;
@@ -48,6 +51,14 @@ public class Hospital implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {
@@ -87,6 +98,7 @@ public class Hospital implements Serializable {
         return "Hospital{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
                 ", address='" + address + '\'' +
                 ", zip=" + zip +
                 ", img='" + img + '\'' +
