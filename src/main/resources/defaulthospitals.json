@@ -13,8 +13,8 @@
         "lastName": "Franco",
         "title": "MD, FACP",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d8.jpg",
+        "specializations": ["Lymphoma", "Leukemia"],
         "patients": []
       },
       {
@@ -23,8 +23,8 @@
         "lastName": "Leguizamo",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d5.jpg",
+        "specializations": ["Brain Cancer", "Bladder Cancer"],
         "patients": []
       },
       {
@@ -33,18 +33,18 @@
         "lastName": "Reddy",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d2.jpg",
+        "specializations": ["Cervical Cancer", "Lung Cancer"],
         "patients": []
       },
       {
         "id": "h1p4",
         "firstName": "Mary",
         "lastName": "Subbannan",
-        "title": "Georgia Cancer Specialists",
+        "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d1.jpg",
+        "specializations": ["Breast Cancer", "Melanoma" ],
         "patients": []
       }
     ]
@@ -63,8 +63,8 @@
         "lastName": "Bend",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d5.jpg",
+        "specializations": ["Kidney Cancer", "Lymphoma", "Leukemia"],
         "patients": []
       },
       {
@@ -73,8 +73,8 @@
         "lastName": "Feinstein",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d2.jpg",
+        "specializations": ["Liver Cancer", "Stomach Cancer"],
         "patients": []
       },
       {
@@ -83,8 +83,8 @@
         "lastName": "Levitt",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d4.jpg",
+        "specializations": ["Colorectal Cancer", "Bone Cancer"],
         "patients": []
       },
       {
@@ -93,8 +93,8 @@
         "lastName": "Tran",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d7.jpg",
+        "specializations": ["Bladder Cancer", "Lung Cancer"],
         "patients": []
       }
     ]
@@ -113,8 +113,8 @@
         "lastName": "Antun",
         "title": "MD, MSc",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d6.jpg",
+        "specializations": ["Oral Cancer", "Prostate Cancer"],
         "patients": []
       },
       {
@@ -123,8 +123,8 @@
         "lastName": "Berkowitz",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d8.jpg",
+        "specializations": ["Lymphoma", "Leukemia"],
         "patients": []
       },
       {
@@ -133,8 +133,8 @@
         "lastName": "Bhatt",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d2.jpg",
+        "specializations": ["Ovrian Cancer", "Brain Tumor"],
         "patients": []
       },
       {
@@ -143,8 +143,8 @@
         "lastName": "Chang",
         "title": "MD",
         "age": 45,
-        "img": "",
-        "specializations": [],
+        "img": "/img/doctors/d3.jpg",
+        "specializations": ["Bone Cancer", "Cervical Cancer"],
         "patients": []
       }
     ]

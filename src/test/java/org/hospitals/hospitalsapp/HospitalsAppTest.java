@@ -65,7 +65,7 @@ public class HospitalsAppTest {
                                    "Northside Hospital",
                                    "",
                                    "some address",
-                                   30040,
+                                   "30040",
                                    "",
                                    null)).block();
         assertNotNull(hospital.getId());
@@ -78,7 +78,7 @@ public class HospitalsAppTest {
                                    "Northside Hospital",
                                    "",
                                    "some address",
-                                   30040,
+                                   "30040",
                                    "",
                                    null));
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospitalMono.block().getId());
@@ -94,7 +94,7 @@ public class HospitalsAppTest {
                                    "Northside Hospital",
                                    "",
                                    "some address",
-                                   30040,
+                                   "30040",
                                    "",
                                    null)).block();
         Hospital hospital2 = hospitalRepository
@@ -102,7 +102,7 @@ public class HospitalsAppTest {
                                    "Northside Hospital",
                                    "",
                                    "some address",
-                                   30040,
+                                   "30040",
                                    "",
                                    null)).block();
         Flux<Hospital> hospitalFlux = hospitalRepository.findAll();
@@ -134,13 +134,15 @@ public class HospitalsAppTest {
                                        "Allan",
                                        "Iverson",
                                        "someaddress",
-                                       30040,
+                                       "30040",
+                                       null,
                                        null);
         Patient patient2 = new Patient("234",
                                        "John",
                                        "Starks",
                                        "someaddress",
-                                       30040,
+                                       "30040",
+                                       null,
                                        null);
 
         doctor1.setPatients(Stream.of(patient1,
@@ -152,7 +154,7 @@ public class HospitalsAppTest {
                                          "Northside Hospital",
                                          "",
                                          "some address",
-                                         30040,
+                                         "30040",
                                          "",
                                          Stream.of(doctor1,
                                                    doctor2).collect(Collectors.toCollection(ArrayList<Doctor>::new)));
@@ -178,7 +180,7 @@ public class HospitalsAppTest {
                                          "Northside Hospital",
                                          "",
                                          "some address",
-                                         0000,
+                                         "0000",
                                          "",
                                          null);
 
@@ -196,7 +198,7 @@ public class HospitalsAppTest {
                      hospitals.size());
         assertEquals("Northside Hospital",
                      hospitals.get(0).getName());
-        assertEquals(30040,
+        assertEquals("30040",
                      hospitals.get(0).getZip());
     }
 
@@ -206,14 +208,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
 
@@ -230,11 +232,11 @@ public class HospitalsAppTest {
                      hospitals.size());
         assertEquals("Northside Hospital",
                      hospitals.get(0).getName());
-        assertEquals(30040,
+        assertEquals("30040",
                      hospitals.get(0).getZip());
         assertEquals("Piedmont Hospital",
                      hospitals.get(1).getName());
-        assertEquals(30040,
+        assertEquals("30040",
                      hospitals.get(1).getZip());
     }
 
@@ -244,14 +246,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
 
@@ -275,14 +277,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
 
@@ -314,7 +316,7 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
 
@@ -342,14 +344,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          30040,
+                                          "30040",
                                           "",
                                           null);
 
@@ -374,14 +376,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
 
@@ -401,16 +403,16 @@ public class HospitalsAppTest {
                 .body("hospitals.size()",
                       is(2),
                       "hospitals[0].zip",
-                      is(30040),
+                      is("30040"),
                       "hospitals[0].name",
                       is("Northside Hospital"),
                       "hospitals[1].zip",
-                      is(30040),
+                      is("30040"),
                       "hospitals[1].name",
                       is("Piedmont Hospital"))
                 .extract().asString();
 
-        assertEquals("{\"hospitals\":[{\"name\":\"Northside Hospital\",\"zip\":30040},{\"name\":\"Piedmont Hospital\",\"zip\":30040}]}",
+        assertEquals("{\"hospitals\":[{\"name\":\"Northside Hospital\",\"zip\":\"30040\"},{\"name\":\"Piedmont Hospital\",\"zip\":\"30040\"}]}",
                      result);
     }
 
@@ -420,14 +422,14 @@ public class HospitalsAppTest {
                                           "Northside Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
         Hospital hospital2 = new Hospital("piedmont",
                                           "Piedmont Hospital",
                                           "",
                                           "some address",
-                                          0000,
+                                          "0000",
                                           "",
                                           null);
 
@@ -445,12 +447,12 @@ public class HospitalsAppTest {
 
         String result = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(testQuery).when().post("/queryhospitals").then().statusCode(200)
                 .body("hospital.zip",
-                      is(30040),
+                      is("30040"),
                       "hospital.name",
                       is("Piedmont Hospital"))
                 .extract().asString();
 
-        assertEquals("{\"hospital\":{\"name\":\"Piedmont Hospital\",\"zip\":30040}}",
+        assertEquals("{\"hospital\":{\"name\":\"Piedmont Hospital\",\"zip\":\"30040\"}}",
                      result);
     }
 }

@@ -6,6 +6,6 @@ when
     $hospital : Hospital()
 then
     modify($hospital) {
-        	setZip(30040)
+        	setZip("30040")
     };
 end

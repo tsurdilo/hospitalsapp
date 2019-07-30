@@ -12,8 +12,9 @@ public class Patient implements Serializable {
     private String firstName;
     private String lastName;
     private String address;
-    private int zip;
+    private String zip;
     private List<Treatment> treatments;
+    private Condition condition;
 
     public Patient() {
 
@@ -23,14 +24,16 @@ public class Patient implements Serializable {
                    String firstName,
                    String lastName,
                    String address,
-                   int zip,
-                   List<Treatment> treatments) {
+                   String zip,
+                   List<Treatment> treatments,
+                   Condition condition) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.zip = zip;
         this.treatments = treatments;
+        this.condition = condition;
     }
 
     public String getId() {
@@ -65,11 +68,11 @@ public class Patient implements Serializable {
         this.address = address;
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -81,6 +84,14 @@ public class Patient implements Serializable {
         this.treatments = treatments;
     }
 
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -88,8 +99,9 @@ public class Patient implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
-                ", zip=" + zip +
+                ", zip='" + zip + '\'' +
                 ", treatments=" + treatments +
+                ", condition=" + condition +
                 '}';
     }
 }

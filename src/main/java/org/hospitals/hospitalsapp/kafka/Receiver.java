@@ -40,6 +40,7 @@ public class Receiver {
         if (foundHospital != null) {
             foundHospital.setAddress(hospital.getAddress());
             foundHospital.setName(hospital.getName());
+            foundHospital.setDesc(hospital.getDesc());
             foundHospital.setZip(hospital.getZip());
             foundHospital.setImg(hospital.getImg());
             foundHospital.setDoctors(hospital.getDoctors());

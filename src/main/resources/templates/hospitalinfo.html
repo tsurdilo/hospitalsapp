@@ -7,7 +7,138 @@
 <body>
 <div class="container">
     <div th:replace="fragments/general :: navbar">...</div>
-    <h2 th:text="${hospital.name}">Hospital name...</h2>
+    <!--<h2 th:text="${hospital.name}">Hospital name...</h2>-->
+    <div class="jumbotron"  style="background: none !important; background-color: #F8F8F8 !important;">
+        <div class="container">
+            <div class="medica-about-text">
+                <h2>Welcome to <span th:text="${hospital.name}">Hospital name...</span></h2>
+                <p><a href="#newpatient">Create New Patient</a> &nbsp;&nbsp; <a href="#selectdoctor">Select a Doctor</a></p>
+            </div>
+
+            <!-- ***** New Patient Start ***** -->
+            <section class="medica-doctors-area section_padding_100_20" id="newpatient">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section_heading">
+                                <img src="/img/doctor-icon.png" alt="">
+                                <h2>Add new Patient</h2>
+                                <p>Given patient conditions we will assign them to a doctor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ***** Create Patient Start ***** -->
+                    <section class="medica-book-an-appointment-area">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-12">
+                                    <div class="medica-appointment-card">
+                                        <h5>New Patient Info </h5>
+
+                                        <form action="#" method="post" th:action="@{/newpatient}" th:object="${patientinput}">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control text-white" name="firstName" id="firstName" placeholder="First Name" th:field="*{firstName}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control text-white" name="lastName" id="lastName" placeholder="Last Name" th:field="*{lastName}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="address" id="address" placeholder="Address" th:field="*{address}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip" th:field="*{zip}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                        <select class="form-control" id="condition" name="condition" th:field="*{condition}">
+                                                            <option selected disabled value="">Condition</option>
+                                                            <option th:value="'Lymphoma'">Lymphoma</option>
+                                                            <option th:value="'Leukemia'">Leukemia</option>
+                                                            <option th:value="'BrainCancer'">Brain Cancer</option>
+                                                            <option th:value="'BladderCancer'">Bladder Cancer</option>
+                                                            <option th:value="'CervicalCancer'">Cervical Cancer</option>
+                                                            <option th:value="'LungCancer'">Lung Cancer</option>
+                                                            <option th:value="'BreastCancer'">Breast Cancer</option>
+                                                            <option th:value="'Melanoma'">Melanoma</option>
+                                                            <option th:value="'KidneyCancer'">Kidney Cancer</option>
+                                                            <option th:value="'LiverCancer'">Liver Cancer</option>
+                                                            <option th:value="'StomachCancer'">Stomach Cancer</option>
+                                                            <option th:value="'ColorectalCancer'">Colorectal Cancer</option>
+                                                            <option th:value="'BoneCancer'">Bone Cancer</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="notes" id="notes" placeholder="Notes" th:field="*{notes}">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="hospitalid" id="hospitalid" th:value="${hospital.id}" />
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn medica-btn mt-15">Add Patient</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- ***** Create Patient End ***** -->
+
+                </div>
+            </section>
+            <!-- ***** New Patient End ***** -->
+
+
+            <!-- ***** Doctors Area Start ***** -->
+            <section class="medica-doctors-area section_padding_100_20" id="selectdoctor">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section_heading">
+                                <img src="/img/doctor-icon.png" alt="">
+                                <h2>Select one of our Doctors</h2>
+                                <p>Selecting a doctor will allow you to see her/his patients and their tests</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12 col-sm-6 col-lg-3" th:each="doctor : ${hospital.doctors}">
+                            <div class="single-doctor-area">
+                                <div class="doctor-thumbnail">
+                                    <img th:src="@{${doctor.img}}" alt="">
+                                </div>
+                                <div class="doctor-meta">
+                                    <h5 th:text="${doctor.firstName + ' ' + doctor.lastName + ', ' + doctor.title}">Doctor info...</h5>
+                                    <h6><b>Specializations:</b></h6>
+                                    <ul>
+                                        <li th:each="special:${doctor.specializations}" th:text="${special}"></li>
+                                    </ul>
+                                    <br/><h6 th:text="${'Num. of patients: ' + #lists.size(doctor.patients)}"></h6>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <!-- ***** Doctors Area End ***** -->
+        </div>
+    </div>
 </div>
 <div th:replace="fragments/general :: footer">...</div>
 <div th:replace="fragments/general :: jsincludes">...</div>

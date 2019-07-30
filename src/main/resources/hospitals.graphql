@@ -16,7 +16,7 @@ type Hospital{
     name:String
     desc:String
     address:String
-    zip:Int
+    zip:String
     img:String
     doctors:[Doctor]
 }
@@ -37,8 +37,9 @@ type Patient{
     firstName:String
     lastName:String
     address:String
-    zip:Int
+    zip:String
     treatments:[Treatment]
+    condition:Condition
 }
 
 type Treatment{
@@ -48,6 +49,13 @@ type Treatment{
     performedOn:String
     tests:[Test]
     alerts:[Alert]
+}
+
+type Condition{
+    name:String
+    stage:Int
+    phase:Int
+    notes:String
 }
 
 type Test{

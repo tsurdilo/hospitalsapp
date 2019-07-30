@@ -1,8 +1,10 @@
 package org.hospitals.hospitalsapp.controller;
 
+import org.hospitals.hospitalsapp.data.input.PatientInput;
 import org.hospitals.hospitalsapp.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,15 @@ public class HospitalController {
     Rendering hospital(@PathVariable("hid") String hospitalid) {
 
         return Rendering.view("hospitalinfo")
-                .modelAttribute("hospital", hospitalService.getHospital(hospitalid)).build();
+                .modelAttribute("hospital", hospitalService.getHospital(hospitalid))
+                .modelAttribute("patientinput", new PatientInput()).build();
+    }
+
+    @RequestMapping(value = "/newpatient", method = RequestMethod.POST)
+    Rendering newPatient(@ModelAttribute PatientInput patientInput) {
+
+        System.out.println("************* NEW PATIENT INPUT\n " + patientInput.toString());
+
+        return Rendering.view("newpatient").build();
     }
 }

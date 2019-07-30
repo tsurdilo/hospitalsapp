@@ -30,7 +30,7 @@ public class HospitalGeneratorUtil {
                             "New Hospital " + counter,
                             "",
                             "some address",
-                            0000,
+                            "0000",
                             "",
                             null);
     }

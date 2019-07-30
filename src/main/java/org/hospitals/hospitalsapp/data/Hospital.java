@@ -14,7 +14,7 @@ public class Hospital implements Serializable {
     private String name;
     private String desc;
     private String address;
-    private int zip;
+    private String zip;
     private String img;
     private List<Doctor> doctors;
 
@@ -25,7 +25,7 @@ public class Hospital implements Serializable {
                     String name,
                     String desc,
                     String address,
-                    int zip,
+                    String zip,
                     String img,
                     List<Doctor> doctors) {
         this.id = id;
@@ -69,11 +69,11 @@ public class Hospital implements Serializable {
         this.address = address;
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -100,7 +100,7 @@ public class Hospital implements Serializable {
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", address='" + address + '\'' +
-                ", zip=" + zip +
+                ", zip='" + zip + '\'' +
                 ", img='" + img + '\'' +
                 ", doctors=" + doctors +
                 '}';
