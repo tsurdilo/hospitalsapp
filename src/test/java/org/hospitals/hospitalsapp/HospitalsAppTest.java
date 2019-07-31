@@ -136,14 +136,20 @@ public class HospitalsAppTest {
                                        "someaddress",
                                        "30040",
                                        null,
-                                       null);
+                                       "",
+                                       null,
+                                       "",
+                                       "");
         Patient patient2 = new Patient("234",
                                        "John",
                                        "Starks",
                                        "someaddress",
                                        "30040",
                                        null,
-                                       null);
+                                       "",
+                                       null,
+                                       "",
+                                       "");
 
         doctor1.setPatients(Stream.of(patient1,
                                       patient2).collect(Collectors.toCollection(ArrayList<Patient>::new)));

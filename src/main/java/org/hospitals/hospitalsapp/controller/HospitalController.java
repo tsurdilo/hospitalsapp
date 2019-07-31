@@ -1,6 +1,7 @@
 package org.hospitals.hospitalsapp.controller;
 
-import org.hospitals.hospitalsapp.data.input.PatientInput;
+import org.hospitals.hospitalsapp.data.Patient;
+import org.hospitals.hospitalsapp.kafka.Sender;
 import org.hospitals.hospitalsapp.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class HospitalController {
     @Autowired
     HospitalService hospitalService;
 
+    @Autowired
+    private Sender sender;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     Rendering index() {
 
@@ -29,13 +33,14 @@ public class HospitalController {
 
         return Rendering.view("hospitalinfo")
                 .modelAttribute("hospital", hospitalService.getHospital(hospitalid))
-                .modelAttribute("patientinput", new PatientInput()).build();
+                .modelAttribute("patient", new Patient()).build();
     }
 
     @RequestMapping(value = "/newpatient", method = RequestMethod.POST)
-    Rendering newPatient(@ModelAttribute PatientInput patientInput) {
+    Rendering newPatient(@ModelAttribute Patient patient) {
 
-        System.out.println("************* NEW PATIENT INPUT\n " + patientInput.toString());
+        System.out.println("************* NEW PATIENT \n " + patient.toString());
+        sender.send(patient);
 
         return Rendering.view("newpatient").build();
     }

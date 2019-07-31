@@ -35,7 +35,7 @@
                                     <div class="medica-appointment-card">
                                         <h5>New Patient Info </h5>
 
-                                        <form action="#" method="post" th:action="@{/newpatient}" th:object="${patientinput}">
+                                        <form action="#" method="post" th:action="@{/newpatient}" th:object="${patient}">
                                             <div class="row">
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
@@ -60,7 +60,7 @@
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                                        <select class="form-control" id="condition" name="condition" th:field="*{condition}">
+                                                        <select class="form-control" id="condition" name="condition" th:field="*{enteredCondition}">
                                                             <option selected disabled value="">Condition</option>
                                                             <option th:value="'Lymphoma'">Lymphoma</option>
                                                             <option th:value="'Leukemia'">Leukemia</option>
@@ -83,7 +83,7 @@
                                                         <input type="text" class="form-control" name="notes" id="notes" placeholder="Notes" th:field="*{notes}">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="hospitalid" id="hospitalid" th:value="${hospital.id}" />
+                                                <input type="hidden" name="hospitalId" id="hospitalId" th:value="${hospital.id}" />
                                                 <div class="col-12">
                                                     <button type="submit" class="btn medica-btn mt-15">Add Patient</button>
                                                 </div>

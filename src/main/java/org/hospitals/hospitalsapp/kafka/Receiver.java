@@ -2,7 +2,9 @@ package org.hospitals.hospitalsapp.kafka;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.hospitals.hospitalsapp.data.Hospital;
+import org.hospitals.hospitalsapp.data.Patient;
 import org.hospitals.hospitalsapp.process.HospitalProcessComponent;
 import org.hospitals.hospitalsapp.repository.HospitalRepository;
 import org.slf4j.Logger;
@@ -28,7 +30,22 @@ public class Receiver {
     }
 
     @KafkaListener(topics = "${kafka.topic.hospital}")
-    public void receive(Hospital hospital) {
+    public void receive(Object receivedObject) {
+
+        ConsumerRecord consumerRecord = (ConsumerRecord) receivedObject;
+
+        if(consumerRecord.value() instanceof Hospital) {
+            handleReceivedHospital((Hospital) consumerRecord.value());
+        } else if(consumerRecord.value() instanceof Patient) {
+            handleReceivedPatient((Patient) consumerRecord.value());
+        } else {
+            LOGGER.warn("Unable to handle consumer record: " + consumerRecord);
+        }
+
+        latch.countDown();
+    }
+
+    private void handleReceivedHospital(Hospital hospital) {
         LOGGER.info("received hospital='{}'",
                     hospital.toString());
 
@@ -49,6 +66,10 @@ public class Receiver {
         } else {
             hospitalRepository.save(hospital).block();
         }
-        latch.countDown();
+    }
+
+    private void handleReceivedPatient(Patient patient) {
+        LOGGER.info("received patient='{}'",
+                    patient.toString());
     }
 }

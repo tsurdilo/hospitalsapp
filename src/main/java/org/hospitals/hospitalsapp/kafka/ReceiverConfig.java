@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.hospitals.hospitalsapp.data.Hospital;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +22,7 @@ public class ReceiverConfig {
     private String bootstrapServers;
 
     @Value("${kafka.topic.hospital}")
-    private String hospitalTopicName;
+    private String topicHospital;
 
     @Bean
     public Map<String, Object> consumerConfigs() {
@@ -35,21 +34,23 @@ public class ReceiverConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                   JsonDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG,
-                  hospitalTopicName);
+                  topicHospital);
 
         return props;
     }
 
     @Bean
-    public ConsumerFactory<String, Hospital> consumerFactory() {
+    public ConsumerFactory<String, Object> consumerFactory() {
+        JsonDeserializer<Object> objectDeserializer = new JsonDeserializer<>();
+        objectDeserializer.addTrustedPackages("*");
         return new DefaultKafkaConsumerFactory<>(consumerConfigs(),
                                                  new StringDeserializer(),
-                                                 new JsonDeserializer<>(Hospital.class));
+                                                 objectDeserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Hospital> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Hospital> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 
         return factory;

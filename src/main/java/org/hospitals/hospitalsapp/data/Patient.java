@@ -14,7 +14,10 @@ public class Patient implements Serializable {
     private String address;
     private String zip;
     private List<Treatment> treatments;
+    private String enteredCondition;
     private Condition condition;
+    private String hospitalId;
+    private String notes;
 
     public Patient() {
 
@@ -26,14 +29,20 @@ public class Patient implements Serializable {
                    String address,
                    String zip,
                    List<Treatment> treatments,
-                   Condition condition) {
+                   String enteredCondition,
+                   Condition condition,
+                   String hospitalId,
+                   String notes) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.zip = zip;
         this.treatments = treatments;
+        this.enteredCondition = enteredCondition;
         this.condition = condition;
+        this.hospitalId = hospitalId;
+        this.notes = notes;
     }
 
     public String getId() {
@@ -92,6 +101,30 @@ public class Patient implements Serializable {
         this.condition = condition;
     }
 
+    public String getEnteredCondition() {
+        return enteredCondition;
+    }
+
+    public void setEnteredCondition(String enteredCondition) {
+        this.enteredCondition = enteredCondition;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -101,7 +134,10 @@ public class Patient implements Serializable {
                 ", address='" + address + '\'' +
                 ", zip='" + zip + '\'' +
                 ", treatments=" + treatments +
+                ", enteredCondition='" + enteredCondition + '\'' +
                 ", condition=" + condition +
+                ", hospitalId='" + hospitalId + '\'' +
+                ", notes='" + notes + '\'' +
                 '}';
     }
 }

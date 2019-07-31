@@ -39,7 +39,10 @@ type Patient{
     address:String
     zip:String
     treatments:[Treatment]
+    enteredCondition:String
     condition:Condition
+    hospitalId:String
+    notes:String
 }
 
 type Treatment{
