@@ -17,6 +17,7 @@ public class Patient implements Serializable {
     private String enteredCondition;
     private Condition condition;
     private String hospitalId;
+    private String doctorId;
     private String notes;
 
     public Patient() {
@@ -32,6 +33,7 @@ public class Patient implements Serializable {
                    String enteredCondition,
                    Condition condition,
                    String hospitalId,
+                   String doctorId,
                    String notes) {
         this.id = id;
         this.firstName = firstName;
@@ -42,6 +44,7 @@ public class Patient implements Serializable {
         this.enteredCondition = enteredCondition;
         this.condition = condition;
         this.hospitalId = hospitalId;
+        this.doctorId = doctorId;
         this.notes = notes;
     }
 
@@ -125,6 +128,14 @@ public class Patient implements Serializable {
         this.notes = notes;
     }
 
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -137,6 +148,7 @@ public class Patient implements Serializable {
                 ", enteredCondition='" + enteredCondition + '\'' +
                 ", condition=" + condition +
                 ", hospitalId='" + hospitalId + '\'' +
+                ", doctorId='" + doctorId + '\'' +
                 ", notes='" + notes + '\'' +
                 '}';
     }

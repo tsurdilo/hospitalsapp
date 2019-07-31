@@ -1,8 +1,11 @@
 package org.hospitals.hospitalsapp.kafka;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.hospitals.hospitalsapp.data.Doctor;
 import org.hospitals.hospitalsapp.data.Hospital;
 import org.hospitals.hospitalsapp.data.Patient;
 import org.hospitals.hospitalsapp.process.HospitalProcessComponent;
@@ -50,7 +53,7 @@ public class Receiver {
                     hospital.toString());
 
         // kogito -- start process
-        hospitalProcessComponent.startHospitalsAddProcess(hospital);
+        hospitalProcessComponent.startNewHospitalProcess(hospital);
 
         Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(hospital.getId());
         Hospital foundHospital = hospitalMonoResult.block();
@@ -71,5 +74,28 @@ public class Receiver {
     private void handleReceivedPatient(Patient patient) {
         LOGGER.info("received patient='{}'",
                     patient.toString());
+
+        // kogito -- start process
+        hospitalProcessComponent.startNewPatientProcess(patient);
+
+//        Mono<Hospital> hospitalMonoResult = hospitalRepository.findById(patient.getHospitalId());
+//        Hospital foundHospital = hospitalMonoResult.block();
+//
+//        if(foundHospital != null) {
+//            List<Doctor> doctorList = foundHospital.getDoctors();
+//            for(Doctor d : doctorList) {
+//                if(d.getId().equals(patient.getDoctorId())) {
+//                    if(d.getPatients() == null) {
+//                        d.setPatients(new ArrayList<>());
+//                    }
+//                    d.getPatients().add(patient);
+//                }
+//            }
+//            LOGGER.info("Updateing hospital: " + foundHospital.toString());
+//            hospitalRepository.save(foundHospital);
+//        } else {
+//            LOGGER.warn("Unable to find hospital with id: " + patient.getHospitalId());
+//        }
+
     }
 }

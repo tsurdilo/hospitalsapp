@@ -42,6 +42,7 @@ type Patient{
     enteredCondition:String
     condition:Condition
     hospitalId:String
+    doctorId:String
     notes:String
 }
 

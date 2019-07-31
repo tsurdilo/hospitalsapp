@@ -139,6 +139,7 @@ public class HospitalsAppTest {
                                        "",
                                        null,
                                        "",
+                                       "",
                                        "");
         Patient patient2 = new Patient("234",
                                        "John",
@@ -148,6 +149,7 @@ public class HospitalsAppTest {
                                        null,
                                        "",
                                        null,
+                                       "",
                                        "",
                                        "");
 

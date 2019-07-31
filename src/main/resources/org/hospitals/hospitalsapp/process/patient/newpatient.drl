@@ -1,0 +1,19 @@
+package org.hospitals.hospitalsapp.process.patient;
+
+import org.hospitals.hospitalsapp.data.Patient;
+
+rule "org.hospitals.hospitalsapp.process.patient.EvalNewPatientCondition"
+ruleflow-group "assigncondition"
+when
+    $patient : Patient()
+then
+    System.out.println("********\n RULES - EVALUATING CONDITION FOR NEW PATIENT: " + $patient.toString());
+end
+
+rule "org.hospitals.hospitalsapp.process.patient.EvalNewPatientDoctor"
+ruleflow-group "assigndoctor"
+when
+    $patient : Patient()
+then
+    System.out.println("********\n RULES - EVALUATING DOCTOR FOR NEW PATIENT: " + $patient.toString());
+end

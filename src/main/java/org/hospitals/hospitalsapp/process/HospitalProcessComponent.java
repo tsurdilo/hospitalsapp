@@ -3,6 +3,7 @@ package org.hospitals.hospitalsapp.process;
 import java.util.Collections;
 
 import org.hospitals.hospitalsapp.data.Hospital;
+import org.hospitals.hospitalsapp.data.Patient;
 import org.kie.kogito.Application;
 import org.kie.kogito.Model;
 import org.kie.kogito.process.Process;
@@ -16,8 +17,8 @@ public class HospitalProcessComponent {
     @Autowired
     Application kogitoApp;
 
-    public ProcessInstance<?> getHospitalsAddProcess(Hospital hospital) {
-        Process<? extends Model> p = kogitoApp.processes().processById("hospitals.add");
+    public ProcessInstance<?> getNewHospitalProcess(Hospital hospital) {
+        Process<? extends Model> p = kogitoApp.processes().processById("newhospital");
 
         Model m = p.createModel();
         m.fromMap(Collections.singletonMap("hospital",
@@ -28,7 +29,23 @@ public class HospitalProcessComponent {
         return processInstance;
     }
 
-    public void startHospitalsAddProcess(Hospital hospital) {
-        getHospitalsAddProcess(hospital).start();
+    public void startNewHospitalProcess(Hospital hospital) {
+        getNewHospitalProcess(hospital).start();
+    }
+
+    public ProcessInstance<?> getNewPatientProcess(Patient patient) {
+        Process<? extends Model> p = kogitoApp.processes().processById("newpatient");
+
+        Model m = p.createModel();
+        m.fromMap(Collections.singletonMap("patient",
+                                           patient));
+
+        ProcessInstance<?> processInstance = p.createInstance(m);
+
+        return processInstance;
+    }
+
+    public void startNewPatientProcess(Patient patient) {
+        getNewPatientProcess(patient).start();
     }
 }
